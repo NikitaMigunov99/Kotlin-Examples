@@ -11,35 +11,35 @@ class JokesController(private val jokesService: JokesService) {
 
     @GetMapping("/joke")
     fun getJoke(): ResponseEntity<JokeModel?> {
-        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().threadId())
+        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().id)
         val joke: JokeModel = jokesService.getJoke()
         return ResponseEntity.ok(joke)
     }
 
     @GetMapping("/joke/{id}")
     fun getJokeById(@PathVariable id: Long): ResponseEntity<JokeModel> {
-        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().threadId())
+        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().id)
         val joke: JokeModel = jokesService.getJokeById(id)
         return ResponseEntity.ok(joke)
     }
 
     @GetMapping("/jokes")
     fun getJokes(): ResponseEntity<List<JokeModel>> {
-        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().threadId())
+        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().id)
         val list: List<JokeModel> = jokesService.getJokes()
         return ResponseEntity.ok(list)
     }
 
     @PostMapping("/save/joke")
     fun saveJoke(@RequestBody request: JokeRequestDTO): ResponseEntity<String> {
-        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().threadId())
+        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().id)
         jokesService.saveJoke(request)
         return ResponseEntity.ok(JOKE_SAVED)
     }
 
     @PostMapping("/save/joke/remote/{id}")
     fun saveJokeById(@PathVariable id: String): ResponseEntity<String> {
-        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().threadId())
+        println("Received request on thread " + Thread.currentThread().name + " " + Thread.currentThread().id)
         jokesService.saveJokeByIdFromRemote(id)
         return ResponseEntity.ok(JOKE_SAVED)
     }
